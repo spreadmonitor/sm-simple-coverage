@@ -1,11 +1,16 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Simple coverage'
+description: 'Do simple coverage check'
+author: 'SpreadMonitor'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  line-coverage-threshold:
+    required: false
+    description: 'Threshold value for line coverage.'
+  coverage-reports:
+    required: false
+    description: 'Absolute or relative paths to the coverage-final report JSON files.'
+outputs:
+  line-coverage:
+    description: 'Line coverage percentage.'
 runs:
-  using: 'node16'
+  using: node16
   main: 'dist/index.js'
