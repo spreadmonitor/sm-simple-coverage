@@ -5,6 +5,7 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+      - 'feat/*'
 
 jobs:
   build: # make sure build/ci work properly
@@ -17,8 +18,22 @@ jobs:
           npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      coverage: 'example coverage'
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
+      - uses: actions/setup-node@v3
         with:
-          milliseconds: 1000
+          node-version: 'lts/*'
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run test
+      - name: Simple coverage
+        uses: ./
+#        with:
+#          line-coverage-threshold: 50
+#          coverage-report-paths: |
+#            ./asd
+#            ./lop
