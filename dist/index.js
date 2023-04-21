@@ -127,6 +127,7 @@ const github_1 = __nccwpck_require__(5438);
 const rest_1 = __nccwpck_require__(5375);
 const get_parameters_util_1 = __nccwpck_require__(1006);
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         let octokit = undefined;
         let checkRunId;
@@ -134,12 +135,11 @@ function run() {
             octokit = new rest_1.Octokit({
                 auth: process.env.GITHUB_TOKEN,
             });
-            console.log({ 'context.payload': github_1.context.payload, env: process.env });
             const checkRun = yield octokit.checks.create({
                 owner: github_1.context.repo.owner,
                 repo: github_1.context.repo.repo,
                 name: 'coverage',
-                head_sha: process.env.GITHUB_SHA,
+                head_sha: (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.statuses_url.split('/').pop(),
                 status: 'queued',
             });
             checkRunId = checkRun.data.id;
