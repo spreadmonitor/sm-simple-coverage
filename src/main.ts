@@ -13,11 +13,13 @@ async function run(): Promise<void> {
             auth: process.env.GITHUB_TOKEN,
         });
 
+        console.log({ 'context.payload': context.payload, env: process.env})
+
         const checkRun = await octokit.checks.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
             name: 'coverage',
-            head_sha: context.payload.after,
+            head_sha: process.env.GITHUB_SHA,
             status: 'queued',
         });
 
