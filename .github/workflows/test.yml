@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npm run test
       - name: Simple coverage
-        uses: ./
+        uses: spreadmonitor/sm-simple-coverage@v0.0.4
 #        with:
 #          line-coverage-threshold: 50
 #          coverage-report-paths: |
