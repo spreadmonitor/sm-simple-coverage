@@ -4,8 +4,14 @@ updates:
     directory: /
     schedule:
       interval: daily
-
   - package-ecosystem: npm
-    directory: /
+    directory: "/"
     schedule:
       interval: daily
+      time: "10:00"
+      timezone: Europe/Budapest
+    open-pull-requests-limit: 0
+    versioning-strategy: increase
+    commit-message:
+      prefix: build
+      include: scope
